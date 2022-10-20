@@ -24,6 +24,10 @@ namespace webapp_travel_agency.Controllers
             List<TravelPackage> pkts = _travelPackagesRepo.GetAll();
             return View(pkts);
         }
+        public IActionResult Detail(int id ) {
+            var tp = _travelPackagesRepo.Get(id);
+            return View(tp);
+        }
         [HttpGet]
         public IActionResult Create()
         {

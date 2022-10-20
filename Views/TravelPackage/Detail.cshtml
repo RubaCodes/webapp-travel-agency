@@ -1,0 +1,19 @@
+﻿@model TravelPackage
+
+<body>
+    <div class="container">
+        <img src="@Model.ImgSource" />
+        <h1>@Model.Name</h1>
+        <p>@Model.Description</p>
+        <h2>Tipo di esperienza: @Model.Category.Name</h2>
+        <p> Prezzo: @Model.Price $/persona</p>
+        <p>Durata: @Model.Dutation</p>
+        <h3>destinazioni</h3>
+        <ul>
+            @foreach (var item in Model.Destinations)
+            {
+                <li>@item.Name</li>
+            }
+        </ul>
+    </div>
+</body>
