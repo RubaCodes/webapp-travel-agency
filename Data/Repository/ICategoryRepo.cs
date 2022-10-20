@@ -8,6 +8,6 @@ namespace webapp_travel_agency.Data.Repository
         public Category Get(int id);
         public void Delete(int id);
         public void Update(Category item );
-        public void Create(Destination item);
+        public void Create(Category item);
     }
 }
