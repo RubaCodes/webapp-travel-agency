@@ -9,5 +9,7 @@ namespace webapp_travel_agency.Data
             : base(options)
         {
         }
+
+        
     }
 }
