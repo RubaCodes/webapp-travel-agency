@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using webapp_travel_agency.Data;
 using webapp_travel_agency.Data.Repository;
 
 namespace webapp_travel_agency.Controllers.Api
@@ -8,19 +10,28 @@ namespace webapp_travel_agency.Controllers.Api
     [ApiController]
     public class HomeController : ControllerBase
     {
-        DbTravelPackageRepo repo;
-        public HomeController(DbTravelPackageRepo repo)
+        DbTravelPackageRepo _repo;
+        ApplicationDbContext _ctx;
+        public HomeController(DbTravelPackageRepo repo, ApplicationDbContext ctx)
         {
-            this.repo = repo;
+            _ctx = ctx;
+            _repo = repo;
         }
         [HttpGet]
-        public IActionResult GetAll() {
-
-            var pkts = repo.GetAll();
-            if (pkts == null) {
-                return NoContent();
+        public IActionResult GetAll(string? search) {
+            if (search == null)
+            {
+                var pkts = _repo.GetAll();
+                if (pkts == null)
+                {
+                    return NoContent();
+                }
+                return Ok(pkts);
             }
-            return Ok(pkts);
+            else {
+               var pkts = _ctx.TravelPackages.Include("Category").Include("Destinations").Where(x => x.Name.Contains(search) || x.Description.Contains(search)).ToList();
+                return Ok(pkts);
+            }
         }
     }
 }
