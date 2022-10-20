@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using webapp_travel_agency.Models;
 
 namespace webapp_travel_agency.Data.Repository
 {
+    [Authorize]
     public class DbTravelPackageRepo : ITravelPackageRepo
     {
         ApplicationDbContext _ctx;
@@ -20,12 +22,14 @@ namespace webapp_travel_agency.Data.Repository
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var travelPackage = _ctx.TravelPackages.Include("Category").Include("Destinations").FirstOrDefault(x => x.Id == id);
+            _ctx.TravelPackages.Remove(travelPackage);
+            _ctx.SaveChanges(true);
         }
 
         public TravelPackage Get(int id)
         {
-            throw new NotImplementedException();
+            return _ctx.TravelPackages.Include("Category").Include("Destinations").Where(x => x.Id == id).FirstOrDefault();
         }
 
         public List<TravelPackage> Get(string name)
@@ -38,9 +42,11 @@ namespace webapp_travel_agency.Data.Repository
             return _ctx.TravelPackages.Include("Category").Include("Destinations").ToList();
         }
 
-        public void Update(TravelPackage item, List<Destination> destinations)
+        public void  Update(TravelPackage item, List<Destination> destinations)
         {
-            throw new NotImplementedException();
-        }
+            item.Destinations = destinations;
+            _ctx.Update(item);
+            _ctx.SaveChanges();
+        }        
     }
 }

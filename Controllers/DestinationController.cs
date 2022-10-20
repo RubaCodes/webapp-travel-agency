@@ -18,12 +18,11 @@ namespace webapp_travel_agency.Controllers
             List<Destination> destinations = _repo.GetAll();
         return View(destinations);
         }
-        [HttpGet("{id}")]
-        
-        public IActionResult Detail(int id) {
-            Destination dest = _repo.Get(id);
-            return View(dest);
-        }
+        //[HttpGet("{id}")] 
+        //public IActionResult Detail(int id) {
+        //    Destination dest = _repo.Get(id);
+        //    return View(dest);
+        //}
         public IActionResult Delete(int id) {
             _repo.Delete(id);
             return RedirectToAction("Index");
