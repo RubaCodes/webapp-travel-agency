@@ -1,0 +1,48 @@
+﻿@model List<TravelPackage>
+
+<div class="text-center">
+    @if (Model.Count > 0)
+    {
+        <h1>Feature list</h1>
+        <a class="btn btn-primary" href="@Url.Action("Create", "TravelPackage")">Inserisci un nuovo film </a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Descrizione</th>
+                    <th scope="col">Immagine</th>
+                    <th scope="col">Prezzo</th>
+                    <th scope="col">Durata</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Destinazioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th scope="row">@item.Id</th>
+                        <td>@item.Name</td>
+                        <td>@item.Description</td>
+                        <td>@item.ImgSource</td>
+                        <td>@item.Price</td>
+                        <td>@item.Dutation</td>
+                        <td>@item.Category.Name</td>
+                        <td>@item.Destinations.ToString()</td>
+                        <td>
+                            <a class="btn btn-primary" href="@Url.Action("Update","TravelPackage", new {id = item.Id})">Update</a>
+                            <form asp-action="Delete" asp-controller="TravelPackage" asp-route-id="@item.Id" method="post">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <h1>La tabella dei pacchetti di viaggio  e' vuota</h1>
+        <a class="btn btn-primary" href="@Url.Action("Create", "TravelPackage")">Inserisci un nuovo pacchetto </a>
+    }

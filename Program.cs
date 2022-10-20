@@ -16,6 +16,8 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<ApplicationDbContext>();
 builder.Services.AddScoped<DbDestinationRepo>();
+builder.Services.AddScoped<DbCategoryRepo>();
+builder.Services.AddScoped<DbTravelPackageRepo>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
