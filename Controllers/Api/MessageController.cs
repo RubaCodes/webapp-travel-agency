@@ -16,14 +16,15 @@ namespace webapp_travel_agency.Controllers.Api
         }
 
         [HttpPost]
-        public IActionResult Send(int idPackage, Message message) {
-            var pkg = db.TravelPackages.Find(idPackage);
-            if (pkg == null) {
+        public IActionResult Send( Message message) {
+            var pkg = db.TravelPackages.Where(x => x.Id == message.TravelPackageId).FirstOrDefault(); ;
+            if (pkg == null)
+            {
                 return NotFound("Il travel package selezionato non esiste");
             }
             Message msg = new();
             msg = message;
-            message.TravelPackageId = idPackage;
+            
             db.Messages.Add(msg);
             db.SaveChanges();
             return Ok("Messagge inviato correttamente");
