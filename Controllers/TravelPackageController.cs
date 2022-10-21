@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using webapp_travel_agency.Data;
 using webapp_travel_agency.Data.Repository;
 using webapp_travel_agency.Models;
+using CsvHelper;
+using CsvHelper.Configuration;
+using System.Text;
 
 namespace webapp_travel_agency.Controllers
 {
@@ -82,6 +85,23 @@ namespace webapp_travel_agency.Controllers
         public ActionResult Delete(int id) {
             _travelPackagesRepo.Delete(id);
             return RedirectToAction("Index");
+        }
+
+        //tentativo di export della tabella pacchetti
+        public IActionResult Export() {
+            var tablePackage = _travelPackagesRepo.GetAll();
+            var cc = new CsvConfiguration(new System.Globalization.CultureInfo("en-US"));
+            using (var ms = new MemoryStream())
+            {
+                using (var sw = new StreamWriter(stream: ms, encoding: new UTF8Encoding(true)))
+                {
+                    using (var cw = new CsvWriter(sw, cc))
+                    {
+                        cw.WriteRecords(tablePackage);
+                    }// The stream gets flushed here.
+                    return File(ms.ToArray(), "text/csv", $"export_{DateTime.UtcNow.Ticks}.csv");
+                }
+            }
         }
     }
 }
