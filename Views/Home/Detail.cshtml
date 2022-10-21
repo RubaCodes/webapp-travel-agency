@@ -25,7 +25,7 @@
                 let destinationsArray = [...data.destinations]
                 let destinations = "";
                 destinationsArray.forEach(e => destinations += `<li>${e.name}</li>`)
-                card.innerHTML = `  <div class="card text-center">
+                card.innerHTML = `  <div class="text-center text-primary box-shadow bg-white ">
                                     <img loading="lazy" height="300" src="${data.imgSource}" />
                                     <h3 class="py-2">${data.name}</h3>
                                     <p>${data.description}</p>
@@ -33,6 +33,7 @@
                                     <hr />
                                     <h3> ${data.dutation} giorni </h3>
                                     <p><strong>${data.price}</strong> $/persona</p>
+                                    <h4>Destinazioni:</h4>
                                     <ul>
                                         ${destinations}
                                     </ul>
