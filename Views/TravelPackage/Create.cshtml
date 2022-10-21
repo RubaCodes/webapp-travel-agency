@@ -1,9 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Create Page";
+    Layout = "_LayoutAdmin";
 }
 @model TravelPackageViewModel
 <body>
-    <section class="text-success">
+    <section >
         <div class="container">
             <form asp-controller="TravelPackage" asp-action="Create" method="post" class="text-danger">
                 @Html.AntiForgeryToken()

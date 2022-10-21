@@ -1,12 +1,14 @@
 ﻿@model List<TravelPackage>
-
+@{
+    Layout = "_LayoutAdmin";
+}
 <div class="text-center">
     @if (Model.Count > 0)
     {
         <h1>Lista Pacchetti</h1>
         <a class="btn btn-primary" href="@Url.Action("Create", "TravelPackage")">Inserisci un nuovo pacchetto </a>
         <table class="table table-striped">
-            <thead class="text-success">
+            <thead class="text-primary">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Nome</th>
@@ -21,7 +23,7 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr class="text-success">
+                    <tr class="text-primary">
                         <th scope="row">@item.Id</th>
                         <td>@item.Name</td>
                         <td>@item.Description</td>
