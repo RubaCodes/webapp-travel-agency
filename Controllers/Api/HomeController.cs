@@ -33,7 +33,7 @@ namespace webapp_travel_agency.Controllers.Api
                 return Ok(pkts);
             }
         }
-        public IActionResult Get(string id) {
+        public IActionResult Get(int id) {
             var tp =_repo.Get(id);
             if (tp == null)
             {

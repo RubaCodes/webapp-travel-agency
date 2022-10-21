@@ -1,3 +1,45 @@
 ﻿@{
-    var id = ViewData["id"]; 
+    var id = ViewData["id"];
 }
+
+<div class="container">
+    <div class="card">
+    </div>
+</div>
+
+<script type="text/javascript">
+    const id = @id
+    const card = document.querySelector(".card")
+
+    card.addEventListener("onload", get())
+
+    function get() {
+        axios.get('/api/home/get', {
+            params: {
+                id: id
+            }
+        })
+            .then(res => {
+                console.log(res)
+                var data = res.data
+                let destinationsArray = [...data.destinations]
+                let destinations = "";
+                destinationsArray.forEach(e => destinations += `<li>${e.name}</li>`)
+                card.innerHTML = `  <div class="card text-center">
+                                    <img loading="lazy" height="300" src="${data.imgSource}" />
+                                    <h3 class="py-2">${data.name}</h3>
+                                    <p>${data.description}</p>
+                                    <h4>${data.category.name}</h4>
+                                    <hr />
+                                    <h3> ${data.dutation} giorni </h3>
+                                    <p><strong>${data.price}</strong> $/persona</p>
+                                    <ul>
+                                        ${destinations}
+                                    </ul>
+                                </div>
+                            </div>`
+            })
+            .catch(err => console.log(err))
+
+    }
+</script>
