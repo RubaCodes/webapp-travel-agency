@@ -4,12 +4,12 @@
 }
 <body>
     <div class="container">
-        <img src="@Model.ImgSource" />
+        <img class="img-fluid" src="@Model.ImgSource" />
         <h1>@Model.Name</h1>
         <p>@Model.Description</p>
-        <h2>Tipo di esperienza: @Model.Category.Name</h2>
+        <h3>Tipo di esperienza: @Model.Category.Name</h3>
         <p> Prezzo: @Model.Price $/persona</p>
-        <p>Durata: @Model.Dutation</p>
+        <p>Durata: @Model.Dutation giorni</p>
         <h3>destinazioni</h3>
         <ul>
             @foreach (var item in Model.Destinations)
@@ -17,5 +17,30 @@
                 <li>@item.Name</li>
             }
         </ul>
+        <h4>Messaggi ricevuti:</h4>
+        @if (Model.Messages.Count > 0)
+        {
+            <table class="table table-striped">
+                <thead class="text-primary">
+                    <tr>
+                        <th scope="col">Email Mittente</th>
+                        <th scope="col">Titolo</th>
+                        <th scope="col">Testo del messaggio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Messages)
+                    {
+                        <tr class="text-primary">
+                            <td>@item.Email</td>
+                        <td>@item.Title</td>
+                        <td>@item.Body</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        }else{
+            <p> Al momento non sembra esserci alcun messaggio...</p>
+        }
     </div>
 </body>

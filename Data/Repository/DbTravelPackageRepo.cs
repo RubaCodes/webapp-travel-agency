@@ -22,14 +22,14 @@ namespace webapp_travel_agency.Data.Repository
 
         public void Delete(int id)
         {
-            var travelPackage = _ctx.TravelPackages.Include("Category").Include("Destinations").FirstOrDefault(x => x.Id == id);
+            var travelPackage = _ctx.TravelPackages.Include("Category").Include("Destinations").Include("Messages").FirstOrDefault(x => x.Id == id);
             _ctx.TravelPackages.Remove(travelPackage);
             _ctx.SaveChanges(true);
         }
 
         public TravelPackage Get(int id)
         {
-            return _ctx.TravelPackages.Include("Category").Include("Destinations").Where(x => x.Id == id).FirstOrDefault();
+            return _ctx.TravelPackages.Include("Category").Include("Destinations").Include("Messages").Where(x => x.Id == id).FirstOrDefault();
         }
 
         public List<TravelPackage> Get(string name)
