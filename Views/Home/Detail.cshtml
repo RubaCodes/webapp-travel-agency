@@ -40,8 +40,12 @@
             title : document.querySelector("#js-message-title").value,
             body : document.querySelector("#js-message-body").value,
         })
-        .then( res =>console.log(res))
-        .catch(err => console.log(err))
+        .then( res => {
+         document.querySelector("#js-message-mail").value = ""
+         document.querySelector("#js-message-title").value = ""
+         document.querySelector("#js-message-body").value = ""
+         alert(res.data)})
+        .catch(err => alert(err.data))
     }
     function get() {
         axios.get('/api/home/get', {
