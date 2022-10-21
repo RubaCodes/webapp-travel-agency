@@ -33,5 +33,15 @@ namespace webapp_travel_agency.Controllers.Api
                 return Ok(pkts);
             }
         }
+        public IActionResult Get(string id) {
+            var tp =_repo.Get(id);
+            if (tp == null)
+            {
+                return NoContent();
+            }
+            else {
+                return Ok(tp);
+            }
+        }
     }
 }

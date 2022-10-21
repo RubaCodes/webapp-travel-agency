@@ -5,7 +5,9 @@
 <div  class="text-center">
     <h1>Our amazing tours</h1>
     <p>lorem ipsum dolor</p>
-    <input type="text" id="js-search" />
+    <div class="py-3">
+        <input class="w-50 rounded p-2" type="text" id="js-search" placeholder="Cerca qui all'interno di un titolo o una descrizione pacchetto" />
+    </div>
     <div class="container py-4">
         <div class="row">
         </div>
@@ -34,8 +36,9 @@
             data.forEach(e => {
                 body.innerHTML+=
                  ` <div class="col-4">
+                        <a class="text-decoration-none" href="Home/Detail/${e.id}">
                         <div class="card text-center">
-                            <img height="300" src="${e.imgSource}" />
+                            <img loading="lazy" height="300" src="${e.imgSource}" />
                             <h3 class="py-2">${e.name}</h3>
                             <p>${e.description}</p>
                             <h4>${e.category.name}</h4>
@@ -43,6 +46,7 @@
                             <small> ${e.dutation} giorni / ${[...e.destinations].length} destinazioni</small>
                             <p><strong>${e.price}</strong> $/persona</p>
                         </div>
+                        </a>
                     </div>`
             })
         })
