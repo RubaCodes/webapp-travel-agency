@@ -9,6 +9,7 @@ namespace webapp_travel_agency.Data
         public DbSet<TravelPackage> TravelPackages { get; set; }
         public DbSet<Category> Categories{ get; set; }
         public DbSet<Destination> Destinations { get; set; }
+        public DbSet<Message> Messages { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
